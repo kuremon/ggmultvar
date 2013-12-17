@@ -1,0 +1,16 @@
+{
+    "contents" : "#' @title Format data to a PCA transformation\n#' @param data the data frame to transform.\n#' @param pca object of class \\code{\\link{prcomp}}.\n#' @param id the index of the id columns of \\code{data}.\n#' @return A data frame representing the dataset \\code{data} transformed according to \\code{pca}.\n#' @export\nformat_pca.to.data=function(pca.data,pca){  \n  data.num=pca.data%*%t(pca$rotation)\n  if(!is.logical(pca$scale)) data.num=data.num*rep(pca$scale,each=nrow(data.num))\n  if(!is.logical(pca$center)) data.num=data.num+rep(pca$center,each=nrow(data.num))\n  data.num\n}\n\n# format_data.to.pca behaves exactly as predict.prcomp\n# format_data.to.pca=function(data,pca,id=1){\n#   data.num=data[setdiff(seq(data),id)]\n#   if(!is.logical(pca$center)) data.num=data.num-rep(pca$center,each=nrow(data.num))\n#   if(!is.logical(pca$scale)) data.num=data.num/rep(pca$scale,each=nrow(data.num))\n#   cbind(data[id],as.data.frame(as.matrix(data.num)%*%(pca$rotation)))\n# }",
+    "created" : 1381289945486.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3422533924",
+    "id" : "BC143BE1",
+    "lastKnownWriteTime" : 1384474640,
+    "path" : "~/R&D/R packages/Source packages/ggmultvar/R/format_data_to_pca.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,15 @@
+{
+    "contents" : "as.factor.logical=function(b){\n  return(factor(b,levels=c(T,F)));\n}\n\n\n#' @title Vizualize NAs in a data frame\n#' @param data a data frame.\n#' @param num.vars Index (or names) of the numeric variables of \\code{data}.\n#' By default all variables are considered.\n#' @param ... Additional arguments to \\code{\\link{see}}\n#' @export\nsee.na=function(data,num.vars=seq(data),...){\n  data.num=data[num.vars]\n  where.na=is.na(data.num) \n  see(colwise(as.factor.logical)(as.data.frame(where.na)),...,use.rownames=F)+labs(fill=\"\")+\n      scale_fill_manual(values=c(\"TRUE\"=\"red\",\"FALSE\"=\"green\"),\n                        breaks=c(FALSE,TRUE),\n                        labels=c(\"TRUE\"=\"NA\",\"FALSE\"=\"Not NA\"),\n                        drop=TRUE)\n}\n\n#' @title Remove rows with NA\n#' @description \n#' This function detects and remove rows where there is at least one occurence of NA.\n#' This function is mainly used before multivariate analyis like PCA to ensure the data are NA-free.\n#' In addition a visualisation of the NA precense is given in order to check for the reliability of \n#' the rows removal.  \n#' @param data a data frame.\n#' @param num.vars Index (or names) of the numeric variables of \\code{data}.\n#' By default all variables are considered.\n#' @return The updated data frame.\n#' @export\nremove.na.rows=function(data,num.vars=seq(data)){\n  data.num=data[num.vars]\n  where.na=is.na(data.num)  \n  row2rem=apply(where.na,1,any)\n  data[!row2rem,]\n}\n\n#' @title Remove 0 variance columns in a data frame \n#' @description \n#' This function detects and remove columns with 0 variance.\n#' This function is mainly used before multivariate analyis like PCA to ensure there is variability\n#' in all parameters.\n#' @param data a data frame.\n#' @param num.vars Index (or names) of the numeric variables of \\code{data}.\n#' By default all variables are considered.\n#' @return The updated data frame.\n#' @export\nremove.zero.var.cols=function(data,num.vars=seq(data)){\n  if(is.numeric(num.vars)) num.vars=names(data)[num.vars]\n  data.num=data[num.vars]\n  where.zero.var=colwise(var,na.rm=TRUE)(data.num)==0\n  remove.vars(data,num.vars[where.zero.var])\n}\n\n#' @title Remove duplicated rows \n#' @description \n#' This function removes any duplicated rows.\n#' @param data a data frame.\n#' @param id Index (or names) of the id variables of \\code{data}.\n#' By default all variables are considered.\n#' @return The updated data frame.\n#' @export\nremove.identical.rows=function(data,id=NULL){\n  if(is.character(id)) id=match(id,names(data))\n  idx=duplicated(data[setdiff(seq(data),id)],MARGIN=1)\n  if(length(idx)!=0){\n    data=data[-idx,]\n  }\n  data\n}\n",
+    "created" : 1385528216673.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4209421052",
+    "id" : "D5AA37FB",
+    "lastKnownWriteTime" : 1385529193,
+    "path" : "~/R&D/R packages/Source packages/ggmultvar/R/remove_rows_columns.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

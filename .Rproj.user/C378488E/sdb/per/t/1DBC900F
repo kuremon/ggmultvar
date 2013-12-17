@@ -1,0 +1,16 @@
+{
+    "contents" : "#' @title ggmultvar\n#' @name ggmultvar\n#' @docType package\n#' @import gdata lazyr\nNULL",
+    "created" : 1381278808763.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "770607561",
+    "id" : "1DBC900F",
+    "lastKnownWriteTime" : 1381290294,
+    "path" : "~/R&D/R packages/Source packages/ggmultvar/R/ggmultvar.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

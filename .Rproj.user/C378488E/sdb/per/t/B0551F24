@@ -1,0 +1,16 @@
+{
+    "contents" : "#' @title Scatter plot using ggplot2\n#' @rdname ggscatter.xy\n#' @param x the x-coordinates of points in the plot\n#' @param y the y-coordinates of points in the plot\n#' @param color the color of points in the plot (\\code{color} should be the same length as \\code{x}, or of length 1).\n#' @param shape the shape of points in the plot (\\code{color} should be the same length as \\code{x}, or of length 1).\n#' @param size the size of points in the plot (\\code{color} should be the same length as \\code{x}, or of length 1).\n#' @param obsnames the names of each point. Providing \\code{obsnames} can be useful when modifying the plot at a later\n#' stage.\n#' @param ... additional arguments for \\code{\\link{geom_point}}.\n#' @return A ggplot2 object.\n#' @export\n#' @examples\n#' \\donttest{\n#' x=mtcars$wt\n#' y=mtcars$disp\n#' color=as.factor(mtcars$cyl)\n#' ggscatter.xy(x,y,color)\n#' M=cbind(x,y)\n#' ggscatter(M,color=\"red\",shape=as.factor(mtcars$am))\n#' }\nggscatter.xy <- function(x,y,color,shape,size,alpha,fill,obsnames,...) {\n  if(missing(obsnames)) obsnames=seq(length(x))\n  data <- data.frame(obsnames=obsnames,x=x,y=y)\n  \n  aes.args=list()\n  args=list()\n  if(!missing(color)){\n    if(length(color)==1){args=c(args,list(color=color))}\n    else{data=cbind(data,color=color)\n         aes.args=c(aes.args,list(color=\"color\"))}\n  }\n  \n  if(!missing(shape)){\n    if(length(shape)==1){args=c(args,list(shape=shape))}\n    else{data=cbind(data,shape=shape)\n         aes.args=c(aes.args,list(shape=\"shape\"))}\n  }\n  \n  if(!missing(size)){\n    if(length(size)==1){args=c(args,list(size=size))}\n    else{data=cbind(data,size=size)\n         aes.args=c(aes.args,list(size=\"size\"))}\n  }\n  \n  if(!missing(alpha)){\n    if(length(alpha)==1){args=c(args,list(alpha=alpha))}\n    else{data=cbind(data,alpha=alpha)\n         aes.args=c(aes.args,list(alpha=\"alpha\"))}\n  }\n  \n  if(!missing(fill)){\n    if(length(fill)==1){args=c(args,list(fill=fill))}\n    else{data=cbind(data,fill=fill)\n         aes.args=c(aes.args,list(fill=\"fill\"))}\n  }\n  \n  mapping=NULL\n  if(length(aes.args)!=0)mapping=do.call(aes_string,aes.args)\n  geom_point.args=c(list(mapping=mapping),args,list(...))\n  ggplot(data, aes(x=x, y=y))+do.call(geom_point,geom_point.args)\n}\n\n#' @rdname ggscatter.xy\n#' @export\nggscatter <- function(data,color,shape,size,obsnames,...){\n  ggscatter.xy(x=data[,1],y=data[,2],color=color,shape=shape,size=size,obsnames,...)\n}",
+    "created" : 1384469075871.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "458360991",
+    "id" : "B0551F24",
+    "lastKnownWriteTime" : 1384987594,
+    "path" : "~/R&D/R packages/Source packages/ggmultvar/R/ggscatter.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

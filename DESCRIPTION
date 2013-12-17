@@ -1,0 +1,16 @@
+Package: ggmultvar
+Type: Package
+Title: Give plotting functionality with ggplot2 for multivariate analysis
+Version: 1.0
+Date: 2013-07-01
+Author: Who wrote it
+Maintainer: Clement Bonini <clement.bonini@gmail.com>
+Description: Allow easy handling of data for pre-mutlivariate analysis and
+    provide streamlined function for plotting results.
+License: What license is it under?
+Collate:
+    'pca_plot.R'
+    'format_data_to_pca.R'
+    'ggmultvar.R'
+    'ggscatter.R'
+    'remove_rows_columns.R'
